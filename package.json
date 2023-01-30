@@ -4,7 +4,8 @@
   "description": "Beautifully showcase your NFTs from Zora.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,13 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "2.8.3"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
