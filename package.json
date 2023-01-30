@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "server:start": "node dist/server.js",
-    "server:dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "server:dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/kislakiruben/blathers#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "nodemon": "^2.0.20"
   },
