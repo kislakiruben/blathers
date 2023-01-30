@@ -1,0 +1,19 @@
+{
+  "name": "blathers",
+  "version": "1.0.0",
+  "description": "Beautifully showcase your NFTs from Zora.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kislakiruben/blathers.git"
+  },
+  "author": "Ruben Kislaki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kislakiruben/blathers/issues"
+  },
+  "homepage": "https://github.com/kislakiruben/blathers#readme"
+}
