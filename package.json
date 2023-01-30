@@ -94,19 +94,19 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/client"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "client/**/*.{js,jsx,ts,tsx}",
+      "!client/**/*.d.ts"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      "<rootDir>/client/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/client/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
     "transform": {
@@ -148,5 +148,17 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

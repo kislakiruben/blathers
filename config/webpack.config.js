@@ -709,14 +709,14 @@ module.exports = function (webpackEnv) {
             // '../cra-template-typescript/template/src/App.tsx'
             // otherwise.
             include: [
-              { file: "../**/src/**/*.{ts,tsx}" },
-              { file: "**/src/**/*.{ts,tsx}" },
+              { file: "../**/client/**/*.{ts,tsx}" },
+              { file: "**/client/**/*.{ts,tsx}" },
             ],
             exclude: [
-              { file: "**/src/**/__tests__/**" },
-              { file: "**/src/**/?(*.){spec|test}.*" },
-              { file: "**/src/setupProxy.*" },
-              { file: "**/src/setupTests.*" },
+              { file: "**/client/**/__tests__/**" },
+              { file: "**/client/**/?(*.){spec|test}.*" },
+              { file: "**/client/setupProxy.*" },
+              { file: "**/client/setupTests.*" },
             ],
           },
           logger: {
