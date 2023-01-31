@@ -6,9 +6,17 @@ import NftItem, { NftItemProps } from "./NftItem";
 const NftList = () => {
   const result = useRecoilValue(nftSearchResultSelector);
 
-  return result.entries.map((nft: NftItemProps) => (
-    <NftItem key={nft.tokenId} {...nft} />
-  ));
+  return (
+    <div className="max-w-screen-2xl mx-auto relative">
+      <ul className="grid gap-6 grid-cols-5">
+        {result.entries.map((nft: NftItemProps) => (
+          <li key={nft.tokenId}>
+            <NftItem {...nft} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default NftList;
