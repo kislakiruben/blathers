@@ -1,10 +1,14 @@
 import { useRecoilValue } from "recoil";
+
 import { nftSearchResultSelector } from "../selectors/nft";
+import NftItem, { NftItemProps } from "./NftItem";
 
 const NftList = () => {
-  const results = useRecoilValue(nftSearchResultSelector);
+  const result = useRecoilValue(nftSearchResultSelector);
 
-  return <pre>List</pre>;
+  return result.entries.map((nft: NftItemProps) => (
+    <NftItem key={nft.tokenId} {...nft} />
+  ));
 };
 
 export default NftList;
