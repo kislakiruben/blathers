@@ -1,23 +1,15 @@
-import React from "react";
+import { Suspense } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Header from "./components/Header";
+import NftList from "./components/NftList";
+
+const App = () => (
+  <div className="App">
+    <Header />
+    <Suspense fallback={<pre>Loading</pre>}>
+      <NftList />
+    </Suspense>
+  </div>
+);
 
 export default App;
