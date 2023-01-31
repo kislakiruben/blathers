@@ -1,19 +1,41 @@
+import NftPreview from "./NftPreview";
+
 export type NftItemProps = {
-  tokenId: string;
+  content: {
+    mediaEncoding: {
+      poster?: string;
+      preview?: string;
+    };
+    mimeType?: string;
+  };
+  image: {
+    mediaEncoding: {
+      poster?: string;
+      preview?: string;
+    };
+    mimeType?: string;
+  };
   metadata: {
     description: string;
     image: string;
     name: string;
+    mimeType?: string;
   };
+  name: string;
+  tokenId: string;
 };
 
-const NftItem = ({ tokenId, metadata }: NftItemProps) => (
-  <div>
-    <figure>
-      <img src={metadata.image} />
-      <figcaption>{metadata.description}</figcaption>
-    </figure>
-  </div>
-);
+const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
+  return (
+    <div className="backdrop-blur-xl bg-slate-900/50 border border-slate-700/60 rounded-lg text-slate-300 h-80 flex flex-col shadow-xl shadow-slate-900/40">
+      <div className="flex-grow relative overflow-hidden rounded-t-lg">
+        <NftPreview image={image} metadata={metadata} />
+      </div>
+      <div className="py-2 px-4 border-t border-slate-700/60 min-h-[37px]">
+        <h2 className="font-semibold text-md">{name}</h2>
+      </div>
+    </div>
+  );
+};
 
 export default NftItem;
