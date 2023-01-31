@@ -39,11 +39,19 @@ export default async (
           token {
             tokenId
             name
-            owner
-            image {
-              url
-            }
+            description
             metadata
+            image {
+              mediaEncoding {
+                ... on ImageEncodingTypes {
+                  poster
+                }
+                ... on VideoEncodingTypes {
+                  preview
+                }
+              }
+              mimeType
+            }
           }
         }
         pageInfo {
@@ -66,6 +74,6 @@ export default async (
       },
     });
   } catch (error) {
-    next(error);
+    res.status(500).send({ error });
   }
 };
