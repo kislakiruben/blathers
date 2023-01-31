@@ -1,4 +1,6 @@
 import axios from "axios";
+import isEmpty from "lodash/isEmpty";
+import trim from "lodash/trim";
 import { selector, selectorFamily } from "recoil";
 
 import { searchTextState } from "../atoms/ui";
@@ -24,10 +26,10 @@ export const nftByOwnerAddressSelector = selectorFamily({
 export const nftSearchResultSelector = selector({
   key: "selectors/nft/nft-search-result",
   get: ({ get }) => {
-    const ownerAddress = get(searchTextState);
+    const ownerAddress = trim(get(searchTextState));
 
-    return ownerAddress.length > 0
-      ? get(nftByOwnerAddressSelector(ownerAddress))
-      : [];
+    return isEmpty(ownerAddress)
+      ? []
+      : get(nftByOwnerAddressSelector(ownerAddress));
   },
 });
