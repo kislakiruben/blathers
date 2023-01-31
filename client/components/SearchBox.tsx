@@ -15,9 +15,33 @@ const SearchBox = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input onChange={onChange} type="text" value={text} />
-      <button type="submit">Search</button>
+    <form className="w-[560px] relative" onSubmit={onSubmit}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        className="absolute stroke-slate-600/90 w-6 h-6 z-10 top-[50%] left-4 -mt-3 z-20"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+        />
+      </svg>
+      <input
+        className="backdrop-blur-xl bg-slate-900/40 border border-slate-700/60 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/50 focus-visible:shadow-[0_0_6px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
+        onChange={onChange}
+        placeholder="Enter wallet address..."
+        type="text"
+        value={text}
+      />
+      <button
+        className="absolute bg-white rounded text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-300 border-b-2 right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
+        type="submit"
+      >
+        Enter
+      </button>
     </form>
   );
 };

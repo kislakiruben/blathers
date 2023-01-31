@@ -1,12 +1,9 @@
 import SearchBox from "./SearchBox";
 
-const Header = () => {
-  return (
-    <header>
-      <h1>Blathers</h1>
-      <SearchBox />
-    </header>
-  );
-};
+const Header = () => (
+  <header className="flex items-center justify-center min-h-[240px]">
+    <SearchBox />
+  </header>
+);
 
 export default Header;
