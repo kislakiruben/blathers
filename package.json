@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "server:start": "node dist/server.js",
-    "server:dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/server.js\"",
+    "server:dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/server/server.js\"",
     "client:start": "node scripts/start.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
