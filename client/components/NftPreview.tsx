@@ -1,5 +1,6 @@
 import NftPreviewImage from "./NftPreviewImage";
 import NftPreviewUnavailable from "./NftPreviewUnavailable";
+import NftPreviewVideo from "./NftPreviewVideo";
 
 export type NftPreviewProps = {
   image: {
@@ -24,6 +25,10 @@ const NftPreview = ({ image, metadata }: NftPreviewProps) => {
       const src = metadata?.image || image?.mediaEncoding.poster || "";
 
       return <NftPreviewImage src={src} />;
+    } else if (mimeType.startsWith("video/")) {
+      const src = metadata?.image || image?.mediaEncoding.preview || "";
+
+      return <NftPreviewVideo mimeType={mimeType} src={src} />;
     }
   }
 
