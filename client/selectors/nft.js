@@ -29,7 +29,7 @@ export const nftSearchResultSelector = selector({
     const ownerAddress = trim(get(searchTextState));
 
     return isEmpty(ownerAddress)
-      ? []
+      ? { entries: [], metadata: {} }
       : get(nftByOwnerAddressSelector(ownerAddress));
   },
 });

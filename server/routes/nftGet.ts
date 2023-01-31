@@ -3,10 +3,13 @@ import { request, gql } from "graphql-request";
 
 const endpoint: string = process.env.API_ENDPOINT!;
 
-interface RequestBody {
+interface RequestQuery {
   after?: string;
-  limit: number;
-  ownerAddresses: string;
+  limit?: number;
+  ownerAddresses?: string;
+}
+interface Node {
+  token: Object;
 }
 
 export default async (
@@ -14,7 +17,7 @@ export default async (
   res: Express.Response,
   next: Express.NextFunction
 ) => {
-  const variables: RequestBody = req.body;
+  const variables: RequestQuery = req.query;
   const query = gql`
     query getNFTsForAddress(
       $ownerAddresses: [String!]
@@ -49,7 +52,13 @@ export default async (
   try {
     const data = await request(endpoint, query, variables);
 
-    res.json(data);
+    res.json({
+      entries: data.tokens.nodes.map((node: Node) => node.token),
+      metadata: {
+        cursor: data.tokens.pageInfo.endCursor,
+        limit: data.tokens.pageInfo.limit,
+      },
+    });
   } catch (error) {
     next(error);
   }
