@@ -1,5 +1,6 @@
 import Express from "express";
 import { request, gql } from "graphql-request";
+import has from "lodash/has";
 
 const endpoint: string = process.env.API_ENDPOINT!;
 
@@ -17,7 +18,12 @@ export default async (
   res: Express.Response,
   next: Express.NextFunction
 ) => {
-  const variables: RequestQuery = req.query;
+  const variables: RequestQuery = {
+    ...req.query,
+    ...(has(req.query, "limit")
+      ? { limit: parseInt(req.query.limit as string, 10) }
+      : {}),
+  };
   const query = gql`
     query getNFTsForAddress(
       $ownerAddresses: [String!]

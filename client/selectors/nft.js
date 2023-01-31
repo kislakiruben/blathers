@@ -13,7 +13,7 @@ export const nftByOwnerAddressSelector = selectorFamily({
   get: (ownerAddress) => async () => {
     try {
       const { data } = await axios.get("/api/nft", {
-        params: { ownerAddresses: ownerAddress },
+        params: { limit: 10, ownerAddresses: ownerAddress },
       });
 
       return data;
