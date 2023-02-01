@@ -23,20 +23,22 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
     <div className="backdrop-blur-xl bg-slate-900/70 border border-slate-400/20 rounded-lg text-slate-400 text-md w-full text-sm">
       {entries.length > 0 ? (
         <div className="flex flex-col min-h-[160px]">
-          <ul className="flex-grow">
-            {entries.map((entry) => (
-              <li className="w-full" key={entry}>
-                <button
-                  className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left first"
-                  onClick={onClickEntry}
-                  type="button"
-                  value={entry}
-                >
-                  {entry}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <div className="flex-grow">
+            <ul className="max-h-[260px] overflow-auto">
+              {entries.map((entry) => (
+                <li className="w-full" key={entry}>
+                  <button
+                    className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left first"
+                    onClick={onClickEntry}
+                    type="button"
+                    value={entry}
+                  >
+                    {entry}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="py-2 px-4 border-t border-slate-400/20 flex items-center justify-end">
             <button
               className="text-pink-500/70 text-xs hover:text-pink-500"
