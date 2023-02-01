@@ -24,6 +24,7 @@ const SearchBox = () => {
   const shouldCloseHistory = useRef<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const historyRef = useRef<HTMLDivElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
   /*
    * There is a slight difference between 'isFocused' and 'showHistory'.
    * The former one is set right away when the user blurs the search input.
@@ -42,7 +43,12 @@ const SearchBox = () => {
     setText((event.target as HTMLInputElement).value);
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    setSearchText(text);
+    if (!isEmpty(trim(text))) {
+      setSearchText(text);
+      setIsFocused(false);
+      setShowHistory(false);
+      inputRef.current?.blur();
+    }
     event.preventDefault();
   };
   const onFocus = () => {
@@ -53,8 +59,8 @@ const SearchBox = () => {
    * To prevent flicker, we add a slight delay when closing the search history.
    */
   const onBlur = () => {
-    setIsFocused(false);
     closeOnBlurTimerRef.current = setTimeout(() => {
+      setIsFocused(false);
       if (shouldCloseHistory.current) {
         setShowHistory(false);
       }
@@ -114,8 +120,16 @@ const SearchBox = () => {
         event.target as HTMLElement,
         inputRef.current as HTMLElement
       );
+      const clickedOnSubmitButton = isNodeInRoot(
+        event.target as HTMLElement,
+        submitButtonRef.current as HTMLElement
+      );
 
-      if (clickedOnSearchHistory || clickedOnSearchInput) {
+      if (
+        clickedOnSearchHistory ||
+        clickedOnSearchInput ||
+        clickedOnSubmitButton
+      ) {
         clearTimeout(closeOnBlurTimerRef.current as NodeJS.Timeout);
         shouldCloseHistory.current = false;
       } else {
@@ -182,12 +196,15 @@ const SearchBox = () => {
         value={text}
       />
       {isFocused ? (
-        <button
-          className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
-          type="submit"
-        >
-          Enter
-        </button>
+        isEmpty(trim(text)) ? null : (
+          <button
+            className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
+            ref={submitButtonRef}
+            type="submit"
+          >
+            Enter
+          </button>
+        )
       ) : (
         <span className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm">
           /
