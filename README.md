@@ -7,24 +7,31 @@ Blathers is a barebone web app to view NFT collections for a specific wallet add
 ## Setup
 
 Clone repo:
+
 ```
 git clone https://github.com/kislakiruben/blathers.git
 ```
+
 ```
 cd blathers
 ```
+
 Install dependencies:
+
 ```
 npm install
 ```
+
 Rename `.env.example`
+
 ```
 mv .env.example .env
 ```
+
 Start the web app:
+
 ```
 npm start
 ```
-This will start:
-* a NodeJS server on `localhost:5001`
-* and an (ejected) Create React App instance on `localhost:3000`; tt will automatically open `localhost:3000` in your default browser.
+
+This will start a NodeJS server on `localhost:5001`.
