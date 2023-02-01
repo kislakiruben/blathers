@@ -28,6 +28,12 @@ Rename `.env.example`
 mv .env.example .env
 ```
 
+Compile typescript and build React:
+
+```
+npm run build
+```
+
 Start the web app:
 
 ```
@@ -35,8 +41,9 @@ npm start
 ```
 
 This will build the React app and then start a NodeJS server on `localhost:5001` with the following endpoints:
-* `/` - main page where the React app is loaded and rendered
-* `/api/nft` - an API endpoint used to call Zora; it accepts the following params:
-  * `ownerAddresses` - wallet address or ENS domain;
-  * `limit` - maximum number of entries to return per call;
-  * `after` - a cursor after which the entries should be returned;
+
+- `/` - main page where the React app is loaded and rendered
+- `/api/nft` - an API endpoint used to call Zora; it accepts the following params:
+  - `ownerAddresses` - wallet address or ENS domain;
+  - `limit` - maximum number of entries to return per call;
+  - `after` - a cursor after which the entries should be returned;
