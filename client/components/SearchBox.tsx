@@ -70,7 +70,7 @@ const SearchBox = () => {
         value={text}
       />
       <button
-        className="absolute bg-white rounded text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-300 border-b-2 right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
+        className="absolute bg-slate-800/80 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/60 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
         type="submit"
       >
         Enter
