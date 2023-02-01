@@ -1,6 +1,7 @@
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import trim from "lodash/trim";
+import uniq from "lodash/uniq";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,6 +10,7 @@ import {
   errorStatusState,
   paginationCursorState,
   paginationHasNextPageState,
+  searchHistoryState,
   searchTextState,
 } from "../atoms/ui";
 import { PAGINATION_LIMIT } from "../constants";
@@ -35,6 +37,7 @@ const SearchBox = () => {
   const setErrorStatus = useSetRecoilState(errorStatusState);
   const setCursor = useSetRecoilState(paginationCursorState);
   const setHasNextPage = useSetRecoilState(paginationHasNextPageState);
+  const setSearchHistory = useSetRecoilState(searchHistoryState);
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     setText((event.target as HTMLInputElement).value);
   };
@@ -73,6 +76,9 @@ const SearchBox = () => {
         setEntries(data.entries);
         setCursor(data.metadata.cursor);
         setHasNextPage(data.metadata.hasNextPage);
+        setSearchHistory((currentEntries): [] => {
+          return uniq([...currentEntries, searchText]) as [];
+        });
       } catch (e: any) {
         setErrorStatus(e?.response?.status || 500);
       }
@@ -82,7 +88,14 @@ const SearchBox = () => {
     setHasNextPage(false);
     setErrorStatus(null);
     asyncLoadEntries();
-  }, [searchText, setCursor, setEntries, setErrorStatus, setHasNextPage]);
+  }, [
+    searchText,
+    setCursor,
+    setEntries,
+    setErrorStatus,
+    setHasNextPage,
+    setSearchHistory,
+  ]);
   useEffect(() => {
     setText(searchText);
   }, [searchText]);
@@ -113,7 +126,12 @@ const SearchBox = () => {
       }
     };
 
-    document.addEventListener("click", onDocumentClick);
+    /*
+     * We use 'useCapture' on this event listener because the history box might change its content and by the time the
+     * listener callback is invoked, the event target might not be in the DOM anymore (and then 'isNodeInRoot' would
+     * return 'false').
+     */
+    document.addEventListener("click", onDocumentClick, true);
 
     return () => {
       document.removeEventListener("click", onDocumentClick);

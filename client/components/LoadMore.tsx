@@ -26,9 +26,9 @@ const LoadMore = () => {
         },
       });
 
-      setEntries(
-        (currentEntries): [] => [...currentEntries, ...data.entries] as []
-      );
+      setEntries((currentEntries): [] => {
+        return [...currentEntries, ...data.entries] as [];
+      });
       setCursor(data.metadata.cursor);
       setHasNextPage(data.metadata.hasNextPage);
     } catch (e) {
