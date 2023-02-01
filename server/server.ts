@@ -7,7 +7,7 @@ import nftGet from "./routes/nftGet";
 dotenv.config();
 
 const app: Express.Application = Express();
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT || process.env.SERVER_PORT;
 
 app.use(bodyParser.json());
 app.use(Express.static("dist"));
