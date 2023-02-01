@@ -41,3 +41,8 @@ export const searchHistoryState = atom({
     },
   ],
 });
+
+export const isLoadingEntriesState = atom({
+  key: "atoms/ui/is-loading-entries",
+  default: false,
+});

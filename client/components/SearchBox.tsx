@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { entriesByOwnerAddressState } from "../atoms/nft";
 import {
   errorStatusState,
+  isLoadingEntriesState,
   paginationCursorState,
   paginationHasNextPageState,
   searchHistoryState,
@@ -38,6 +39,7 @@ const SearchBox = () => {
   const setErrorStatus = useSetRecoilState(errorStatusState);
   const setCursor = useSetRecoilState(paginationCursorState);
   const setHasNextPage = useSetRecoilState(paginationHasNextPageState);
+  const setisLoadingEntries = useSetRecoilState(isLoadingEntriesState);
   const setSearchHistory = useSetRecoilState(searchHistoryState);
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     setText((event.target as HTMLInputElement).value);
@@ -79,6 +81,7 @@ const SearchBox = () => {
           params: { limit: PAGINATION_LIMIT, ownerAddresses: searchText },
         });
 
+        setisLoadingEntries(false);
         setEntries(data.entries);
         setCursor(data.metadata.cursor);
         setHasNextPage(data.metadata.hasNextPage);
@@ -86,6 +89,7 @@ const SearchBox = () => {
           return uniq([...currentEntries, searchText]) as [];
         });
       } catch (e: any) {
+        setisLoadingEntries(false);
         setErrorStatus(e?.response?.status || 500);
       }
     };
@@ -93,6 +97,7 @@ const SearchBox = () => {
     setCursor("");
     setHasNextPage(false);
     setErrorStatus(null);
+    setisLoadingEntries(true);
     asyncLoadEntries();
   }, [
     searchText,
@@ -100,6 +105,7 @@ const SearchBox = () => {
     setEntries,
     setErrorStatus,
     setHasNextPage,
+    setisLoadingEntries,
     setSearchHistory,
   ]);
   useEffect(() => {

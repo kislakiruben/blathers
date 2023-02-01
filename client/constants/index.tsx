@@ -7,3 +7,4 @@ export const PLACEHOLDER_ADDRESSES = [
   "jacob.eth",
   "sdsd.eth",
 ];
+export const SHOW_LOADING_INDICATOR_DELAY_TIMER = 800;
