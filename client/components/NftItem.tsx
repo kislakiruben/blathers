@@ -32,7 +32,15 @@ const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
         <NftPreview image={image} metadata={metadata} />
       </div>
       <div className="py-2 px-4 border-t border-slate-700/60 min-h-[37px]">
-        <h2 className="font-semibold text-md">{name}</h2>
+        {name ? (
+          <h2 className="font-semibold text-md">{name}</h2>
+        ) : (
+          <h2 className="text-md text-slate-300/50">
+            <pre className="truncate text-ellipsis overflow-hidden">
+              {tokenId}
+            </pre>
+          </h2>
+        )}
       </div>
     </div>
   );
