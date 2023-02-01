@@ -50,13 +50,10 @@ const NftPreviewVideo = ({ mimeType, src }: NftPreviewVideoProps) => {
   return (
     <video
       autoPlay
-      className={cx(
-        "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-        {
-          visible: loaded,
-          invisible: !loaded,
-        }
-      )}
+      className={cx("w-full h-full object-cover", {
+        visible: loaded,
+        invisible: !loaded,
+      })}
       loop
       muted
       playsInline
