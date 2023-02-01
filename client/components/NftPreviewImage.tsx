@@ -44,7 +44,7 @@ const NftPreviewImage = ({ src }: NftPreviewImageProps) => {
 
   return (
     <img
-      className={cx("w-full h-full object-cover", {
+      className={cx("w-full h-full object-cover rounded-t-lg", {
         visible: loaded,
         invisible: !loaded,
       })}
