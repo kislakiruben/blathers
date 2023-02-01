@@ -1,6 +1,7 @@
 import NftPreview from "./NftPreview";
 
 export type NftItemProps = {
+  collectionName: string;
   content: {
     mediaEncoding: {
       poster?: string;
@@ -25,7 +26,14 @@ export type NftItemProps = {
   tokenId: string;
 };
 
-const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
+const NftItem = ({
+  collectionName,
+  content,
+  image,
+  metadata,
+  name,
+  tokenId,
+}: NftItemProps) => {
   const onCopyToClipboard = (text: string) => () => {
     navigator.clipboard.writeText(text);
   };
@@ -72,11 +80,21 @@ const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
             </span>
           </span>
         </li>
+        <li className="flex justify-between mb-1">
+          <span className="mr-2 whitespace-nowrap">
+            <strong>Collection</strong>
+          </span>
+          <span className="min-w-0 truncate text-ellipsis overflow-hidden whitespace-nowrap">
+            {collectionName}
+          </span>
+        </li>
         <li className="flex justify-between">
           <span className="mr-2 whitespace-nowrap">
             <strong>Blockchain</strong>
           </span>
-          <span>Ethereum</span>
+          <span className="min-w-0 truncate text-ellipsis overflow-hidden whitespace-nowrap">
+            Ethereum
+          </span>
         </li>
       </ul>
     </div>
