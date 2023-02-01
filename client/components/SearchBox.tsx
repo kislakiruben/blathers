@@ -176,7 +176,7 @@ const SearchBox = () => {
   }, [isFocused]);
 
   return (
-    <form className="w-[560px] relative" onSubmit={onSubmit}>
+    <form className="max-w-[560px] w-full relative" onSubmit={onSubmit}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
