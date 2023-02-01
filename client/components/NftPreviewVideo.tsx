@@ -38,8 +38,8 @@ const NftPreviewVideo = ({ mimeType, src }: NftPreviewVideoProps) => {
     }
 
     return () => {
-      currentSourceRef!.removeEventListener("error", onError);
-      currentVideoRef!.removeEventListener("loadeddata", onLoad);
+      currentSourceRef?.removeEventListener("error", onError);
+      currentVideoRef?.removeEventListener("loadeddata", onLoad);
     };
   }, []);
 

@@ -33,8 +33,8 @@ const NftPreviewImage = ({ src }: NftPreviewImageProps) => {
     }
 
     return () => {
-      currentRef!.removeEventListener("error", onError);
-      currentRef!.removeEventListener("load", onLoad);
+      currentRef?.removeEventListener("error", onError);
+      currentRef?.removeEventListener("load", onLoad);
     };
   }, []);
 
