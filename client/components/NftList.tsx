@@ -4,12 +4,12 @@ import { nftSearchResultSelector } from "../selectors/nft";
 import NftItem, { NftItemProps } from "./NftItem";
 
 const NftList = () => {
-  const result = useRecoilValue(nftSearchResultSelector);
+  const entries = useRecoilValue(nftSearchResultSelector);
 
   return (
-    <div className="max-w-screen-2xl mx-auto relative">
-      <ul className="grid gap-6 grid-cols-5">
-        {result.entries.map((nft: NftItemProps) => (
+    <div className="flex flex-col items-center max-w-screen-2xl mx-auto relative pb-[120px]">
+      <ul className="grid gap-6 grid-cols-5 mb-20 w-full">
+        {entries.map((nft: NftItemProps) => (
           <li key={nft.tokenId}>
             <NftItem {...nft} />
           </li>

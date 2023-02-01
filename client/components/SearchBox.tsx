@@ -1,11 +1,17 @@
-import { useSetRecoilState } from "recoil";
-import { useState } from "react";
+import axios from "axios";
+import isEmpty from "lodash/isEmpty";
+import trim from "lodash/trim";
+import { useSetRecoilState, useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
+import { entriesByOwnerAddressState } from "../atoms/nft";
 import { searchTextState } from "../atoms/ui";
+import { PAGINATION_LIMIT } from "../constants";
 
 const SearchBox = () => {
   const [text, setText] = useState("");
-  const setSearchText = useSetRecoilState(searchTextState);
+  const [searchText, setSearchText] = useRecoilState(searchTextState);
+  const setEntries = useSetRecoilState(entriesByOwnerAddressState(searchText));
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     setText((event.target as HTMLInputElement).value);
   };
@@ -13,6 +19,24 @@ const SearchBox = () => {
     setSearchText(text);
     event.preventDefault();
   };
+
+  useEffect(() => {
+    if (isEmpty(trim(searchText))) return;
+
+    const asyncLoadEntries = async () => {
+      try {
+        const { data } = await axios.get("/api/nft", {
+          params: { limit: PAGINATION_LIMIT, ownerAddresses: searchText },
+        });
+
+        setEntries(data.entries);
+      } catch (e) {
+        throw e;
+      }
+    };
+
+    asyncLoadEntries();
+  }, [searchText, setEntries]);
 
   return (
     <form className="w-[560px] relative" onSubmit={onSubmit}>
@@ -30,6 +54,7 @@ const SearchBox = () => {
         />
       </svg>
       <input
+        autoFocus
         className="backdrop-blur-xl bg-slate-900/40 border border-slate-700/60 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/50 focus-visible:shadow-[0_0_6px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
         onChange={onChange}
         placeholder="Enter wallet address..."
