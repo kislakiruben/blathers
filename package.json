@@ -4,10 +4,11 @@
   "description": "Beautifully showcase your NFTs from Zora.",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "server:start": "node dist/server.js",
     "server:dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/server/server.js\"",
+    "server:start": "npx tsc && node -r dotenv/config dist/server/server.js",
+    "client:dev": "node scripts/start.js",
     "client:start": "node scripts/start.js",
+    "start": "concurrently \"npx tsc\" \"node -r dotenv/config dist/server/server.js\" \"node scripts/start.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
