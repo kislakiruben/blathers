@@ -37,7 +37,7 @@ const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
             {name}
           </h2>
         ) : (
-          <h2 className="text-md text-slate-300/50">
+          <h2 className="text-md text-slate-300/50 w-full">
             <pre className="truncate text-ellipsis overflow-hidden whitespace-nowrap">
               {tokenId}
             </pre>
