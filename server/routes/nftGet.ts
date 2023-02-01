@@ -101,7 +101,7 @@ export default async (
     if (addressNotFoundError) {
       res.sendStatus(404);
     } else {
-      res.status(500).send({ error });
+      next(error);
     }
   }
 };
