@@ -15,7 +15,7 @@ const App = () => {
     <div className="bg-slate-900 relative min-h-[100vh] flex flex-col">
       <div className="bg-[url('../public/bg.jpg')] bg-[center_-800px] opacity-50 fixed -top-10 -bottom-10 -left-10 -right-10 bg-cover blur-xl z-0 shrink-0 grow-0" />
       <Header />
-      <div className="grow flex flex-col items-center max-w-screen-2xl mx-auto relative pb-[120px]">
+      <div className="grow flex flex-col items-center max-w-screen-2xl mx-auto relative pb-[120px] px-10">
         {errorStatus === 404 ? (
           <ErrorAddressNotFound />
         ) : errorStatus !== null ? (
