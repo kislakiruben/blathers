@@ -27,11 +27,11 @@ export type NftItemProps = {
 
 const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
   return (
-    <div className="backdrop-blur-xl bg-slate-900/50 border border-slate-700/60 rounded-lg text-slate-300 h-80 flex flex-col shadow-xl shadow-slate-900/40">
+    <div className="backdrop-blur-xl bg-slate-900/50 border border-slate-400/20 rounded-lg text-slate-300 h-80 flex flex-col shadow-xl shadow-slate-900/40">
       <div className="flex-grow relative overflow-hidden rounded-t-lg">
         <NftPreview image={image} metadata={metadata} />
       </div>
-      <div className="py-2 px-4 border-t border-slate-700/60 min-h-[41px] flex items-center justify-center">
+      <div className="py-2 px-4 border-t border-slate-400/20 min-h-[41px] flex items-center justify-center">
         {name ? (
           <h2 className="font-semibold text-md text-ellipsis overflow-hidden whitespace-nowrap">
             {name}

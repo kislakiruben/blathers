@@ -9,7 +9,7 @@ const ErrorAddressNotFound = () => {
   };
 
   return (
-    <div className="backdrop-blur-xl bg-slate-900/50 border border-slate-700/60 rounded-lg text-slate-300 flex flex-col shadow-xl shadow-slate-900/40 px-10 py-16 mx-auto max-w-screen-md">
+    <div className="backdrop-blur-xl bg-slate-900/50 border border-slate-400/20 rounded-lg text-slate-300 flex flex-col shadow-xl shadow-slate-900/40 px-10 py-16 mx-auto max-w-screen-md">
       <h2 className="font-bold text-xl text-center mb-4">
         Address or ENS domain not found
       </h2>

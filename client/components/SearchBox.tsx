@@ -137,7 +137,7 @@ const SearchBox = () => {
       </svg>
       <input
         autoFocus
-        className="backdrop-blur-xl bg-slate-900/40 border border-slate-700/60 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/70 focus-visible:shadow-[0_0_10px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
+        className="backdrop-blur-xl bg-slate-900/40 border border-slate-400/20 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/70 focus-visible:shadow-[0_0_10px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}

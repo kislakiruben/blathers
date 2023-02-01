@@ -15,7 +15,7 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
   };
 
   return (
-    <div className="backdrop-blur-xl bg-slate-900/40 border border-slate-700/60 rounded-lg text-slate-400 text-md w-full text-sm">
+    <div className="backdrop-blur-xl bg-slate-900/70 border border-slate-400/20 rounded-lg text-slate-400 text-md w-full text-sm">
       <div>
         {entries.length > 0 ? (
           <>
@@ -24,7 +24,7 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
                 <pre>entry</pre>
               ))}
             </ul>
-            <div className="py-2 px-4 border-t border-slate-700/60 flex items-center justify-end">
+            <div className="py-2 px-4 border-t border-slate-400/20 flex items-center justify-end">
               <button
                 className="text-pink-500/70 text-xs hover:text-pink-500"
                 type="button"
@@ -46,7 +46,7 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
                 </em>
               </p>
             </div>
-            <ul className="text-slate-400/80 text-sm border-t border-slate-700/60">
+            <ul className="text-slate-400/80 text-sm border-t border-slate-400/20">
               <li className="w-full">
                 <button
                   className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left"
