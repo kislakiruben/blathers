@@ -14,3 +14,8 @@ export const paginationHasNextPageState = atom({
   key: "atoms/ui/pagination-has-next-page",
   default: false,
 });
+
+export const errorStatusState = atom({
+  key: "atoms/ui/error-status",
+  default: null,
+});

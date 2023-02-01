@@ -75,7 +75,17 @@ export default async (
         limit: data.tokens.pageInfo.limit,
       },
     });
-  } catch (error) {
-    res.status(500).send({ error });
+  } catch (error: any) {
+    const addressNotFoundError = error?.response.errors.some((err: any) => {
+      return err.message.includes(
+        "Address must be a valid address or ENS domain"
+      );
+    });
+
+    if (addressNotFoundError) {
+      res.sendStatus(404);
+    } else {
+      res.status(500).send({ error });
+    }
   }
 };

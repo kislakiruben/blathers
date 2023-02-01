@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { entriesByOwnerAddressState } from "../atoms/nft";
 import {
+  errorStatusState,
   paginationCursorState,
   paginationHasNextPageState,
   searchTextState,
@@ -16,6 +17,7 @@ const SearchBox = () => {
   const [text, setText] = useState("");
   const [searchText, setSearchText] = useRecoilState(searchTextState);
   const setEntries = useSetRecoilState(entriesByOwnerAddressState(searchText));
+  const setErrorStatus = useSetRecoilState(errorStatusState);
   const setCursor = useSetRecoilState(paginationCursorState);
   const setHasNextPage = useSetRecoilState(paginationHasNextPageState);
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -38,13 +40,19 @@ const SearchBox = () => {
         setEntries(data.entries);
         setCursor(data.metadata.cursor);
         setHasNextPage(data.metadata.hasNextPage);
-      } catch (e) {
-        throw e;
+      } catch (e: any) {
+        setErrorStatus(e?.response?.status || 500);
       }
     };
 
+    setCursor("");
+    setHasNextPage(false);
+    setErrorStatus(null);
     asyncLoadEntries();
-  }, [searchText, setCursor, setEntries, setHasNextPage]);
+  }, [searchText, setCursor, setEntries, setErrorStatus, setHasNextPage]);
+  useEffect(() => {
+    setText(searchText);
+  }, [searchText]);
 
   return (
     <form className="w-[560px] relative" onSubmit={onSubmit}>
