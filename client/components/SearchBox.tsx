@@ -137,6 +137,23 @@ const SearchBox = () => {
       document.removeEventListener("click", onDocumentClick);
     };
   }, []);
+  useEffect(() => {
+    const onDocumentKeyUp = (event: KeyboardEvent) => {
+      if (event.key === "/" || event.keyCode === 191) {
+        inputRef.current?.focus();
+      }
+    };
+
+    if (isFocused) {
+      document.removeEventListener("keyup", onDocumentKeyUp);
+    } else {
+      document.addEventListener("keyup", onDocumentKeyUp);
+    }
+
+    return () => {
+      document.removeEventListener("keyup", onDocumentKeyUp);
+    };
+  }, [isFocused]);
 
   return (
     <form className="w-[560px] relative" onSubmit={onSubmit}>
