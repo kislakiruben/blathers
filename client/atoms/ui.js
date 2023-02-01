@@ -19,3 +19,8 @@ export const errorStatusState = atom({
   key: "atoms/ui/error-status",
   default: null,
 });
+
+export const searchHistoryState = atom({
+  key: "atoms/ui/search-history",
+  default: [],
+});

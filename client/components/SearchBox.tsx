@@ -2,7 +2,7 @@ import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import trim from "lodash/trim";
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { entriesByOwnerAddressState } from "../atoms/nft";
 import {
@@ -12,10 +12,25 @@ import {
   searchTextState,
 } from "../atoms/ui";
 import { PAGINATION_LIMIT } from "../constants";
+import SearchBoxHistory from "./SearchBoxHistory";
+import { isNodeInRoot } from "../utils";
+
+const HIDE_HISTORY_TIMEOUT = 160;
 
 const SearchBox = () => {
-  const [text, setText] = useState("");
+  const closeOnBlurTimerRef = useRef<null | NodeJS.Timeout>(null);
+  const shouldCloseHistory = useRef<boolean>(true);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const historyRef = useRef<HTMLDivElement>(null);
+  /*
+   * There is a slight difference between 'isFocused' and 'showHistory'.
+   * The former one is set right away when the user blurs the search input.
+   * The latter one is set with a sligh delay (HIDE_HISTORY_TIMEOUT) after the user blurs the input.
+   */
+  const [isFocused, setIsFocused] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const [searchText, setSearchText] = useRecoilState(searchTextState);
+  const [text, setText] = useState("");
   const setEntries = useSetRecoilState(entriesByOwnerAddressState(searchText));
   const setErrorStatus = useSetRecoilState(errorStatusState);
   const setCursor = useSetRecoilState(paginationCursorState);
@@ -26,6 +41,24 @@ const SearchBox = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setSearchText(text);
     event.preventDefault();
+  };
+  const onFocus = () => {
+    setIsFocused(true);
+    setShowHistory(true);
+  };
+  /*
+   * To prevent flicker, we add a slight delay when closing the search history.
+   */
+  const onBlur = () => {
+    setIsFocused(false);
+    closeOnBlurTimerRef.current = setTimeout(() => {
+      if (shouldCloseHistory.current) {
+        setShowHistory(false);
+      }
+    }, HIDE_HISTORY_TIMEOUT);
+  };
+  const onHideHistory = () => {
+    setShowHistory(false);
   };
 
   useEffect(() => {
@@ -53,6 +86,39 @@ const SearchBox = () => {
   useEffect(() => {
     setText(searchText);
   }, [searchText]);
+  /*
+   * We don't want to hide the history if:
+   * - the user clicks on the search input;
+   * - the user clicks on any element within the search history itself;
+   */
+  useEffect(() => {
+    const onDocumentClick = (event: MouseEvent) => {
+      const clickedOnSearchHistory = isNodeInRoot(
+        event.target as HTMLElement,
+        historyRef.current as HTMLElement
+      );
+      const clickedOnSearchInput = isNodeInRoot(
+        event.target as HTMLElement,
+        inputRef.current as HTMLElement
+      );
+
+      if (clickedOnSearchHistory || clickedOnSearchInput) {
+        clearTimeout(closeOnBlurTimerRef.current as NodeJS.Timeout);
+        shouldCloseHistory.current = false;
+      } else {
+        closeOnBlurTimerRef.current = setTimeout(() => {
+          setShowHistory(false);
+        }, HIDE_HISTORY_TIMEOUT);
+        shouldCloseHistory.current = true;
+      }
+    };
+
+    document.addEventListener("click", onDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", onDocumentClick);
+    };
+  }, []);
 
   return (
     <form className="w-[560px] relative" onSubmit={onSubmit}>
@@ -72,17 +138,32 @@ const SearchBox = () => {
       <input
         autoFocus
         className="backdrop-blur-xl bg-slate-900/40 border border-slate-700/60 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/70 focus-visible:shadow-[0_0_10px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
+        onBlur={onBlur}
         onChange={onChange}
+        onFocus={onFocus}
         placeholder="Wallet address or ENS domain..."
+        ref={inputRef}
         type="text"
         value={text}
       />
-      <button
-        className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
-        type="submit"
+      {isFocused ? (
+        <button
+          className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
+          type="submit"
+        >
+          Enter
+        </button>
+      ) : (
+        <span className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm">
+          /
+        </span>
+      )}
+      <div
+        className="absolute top-[100%] right-0 left-0 pt-3 z-10"
+        ref={historyRef}
       >
-        Enter
-      </button>
+        {showHistory ? <SearchBoxHistory hideHistory={onHideHistory} /> : null}
+      </div>
     </form>
   );
 };

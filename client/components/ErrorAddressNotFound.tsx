@@ -21,7 +21,7 @@ const ErrorAddressNotFound = () => {
         <p className="text-slate-400/80 leading-7 text-sm">
           Check out these owners in the mean time:
         </p>
-        <ul className=" text-slate-400/80 leading-7 text-sm">
+        <ul className="text-slate-400/80 leading-7 text-sm">
           <li>
             <button
               className="text-pink-500 hover:underline"
