@@ -31,12 +31,14 @@ const NftItem = ({ content, image, metadata, name, tokenId }: NftItemProps) => {
       <div className="flex-grow relative overflow-hidden rounded-t-lg">
         <NftPreview image={image} metadata={metadata} />
       </div>
-      <div className="py-2 px-4 border-t border-slate-700/60 min-h-[37px]">
+      <div className="py-2 px-4 border-t border-slate-700/60 min-h-[41px] flex items-center justify-center">
         {name ? (
-          <h2 className="font-semibold text-md">{name}</h2>
+          <h2 className="font-semibold text-md text-ellipsis overflow-hidden whitespace-nowrap">
+            {name}
+          </h2>
         ) : (
           <h2 className="text-md text-slate-300/50">
-            <pre className="truncate text-ellipsis overflow-hidden">
+            <pre className="truncate text-ellipsis overflow-hidden whitespace-nowrap">
               {tokenId}
             </pre>
           </h2>

@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { nftSearchResultSelector } from "../selectors/nft";
 import NftItem, { NftItemProps } from "./NftItem";
+import NftItemErrorBoundary from "./NftItemErrorBoundary";
 import LoadMore from "./LoadMore";
 
 const NftList = () => {
@@ -12,7 +13,9 @@ const NftList = () => {
       <ul className="grid gap-6 grid-cols-5 mb-20 w-full">
         {entries.map((nft: NftItemProps) => (
           <li key={nft.tokenId}>
-            <NftItem {...nft} />
+            <NftItemErrorBoundary>
+              <NftItem {...nft} />
+            </NftItemErrorBoundary>
           </li>
         ))}
       </ul>
