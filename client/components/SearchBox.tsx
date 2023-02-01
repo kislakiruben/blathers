@@ -192,7 +192,7 @@ const SearchBox = () => {
       </svg>
       <input
         autoFocus
-        className="backdrop-blur-xl bg-slate-900/40 border border-slate-400/20 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/70 focus-visible:shadow-[0_0_10px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
+        className="bg-slate-900/60 border border-slate-400/20 rounded-full text-slate-400 text-md py-3 pl-12 pr-20 w-full relative z-10 placeholder:text-slate-600/90 focus-visible:outline-none focus-visible:border-pink-500/70 focus-visible:shadow-[0_0_10px_0_rgba(236,72,153,0.5)] caret-pink-500 transition-colors"
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
@@ -204,7 +204,7 @@ const SearchBox = () => {
       {isFocused ? (
         isEmpty(trim(text)) ? null : (
           <button
-            className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm"
+            className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm invisible sm:visible"
             ref={submitButtonRef}
             type="submit"
           >
@@ -212,12 +212,12 @@ const SearchBox = () => {
           </button>
         )
       ) : (
-        <span className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm">
+        <span className="absolute bg-slate-800/90 rounded-md text-slate-400 text-[11px] font-semibold uppercase py-1 px-3 border border-slate-900/90 border-b-[3px] right-4 z-20 top-[50%] -translate-y-1/2 shadow-sm invisible sm:visible">
           /
         </span>
       )}
       <div
-        className="absolute top-[100%] right-0 left-0 pt-3 z-10"
+        className="absolute top-[100%] right-0 left-0 pt-2 z-10"
         ref={historyRef}
       >
         {showHistory ? <SearchBoxHistory hideHistory={onHideHistory} /> : null}

@@ -20,7 +20,7 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
   };
 
   return (
-    <div className="backdrop-blur-xl bg-slate-900/70 border border-slate-400/20 rounded-lg text-slate-400 text-md w-full text-sm">
+    <div className="backdrop-blur-xl bg-slate-900/80 border border-slate-400/20 rounded-lg text-slate-400 text-md w-full text-sm shadow-lg">
       {entries.length > 0 ? (
         <div className="flex flex-col min-h-[160px]">
           <div className="flex-grow">
