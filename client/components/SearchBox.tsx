@@ -5,13 +5,19 @@ import { useSetRecoilState, useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 
 import { entriesByOwnerAddressState } from "../atoms/nft";
-import { searchTextState } from "../atoms/ui";
+import {
+  paginationCursorState,
+  paginationHasNextPageState,
+  searchTextState,
+} from "../atoms/ui";
 import { PAGINATION_LIMIT } from "../constants";
 
 const SearchBox = () => {
   const [text, setText] = useState("");
   const [searchText, setSearchText] = useRecoilState(searchTextState);
   const setEntries = useSetRecoilState(entriesByOwnerAddressState(searchText));
+  const setCursor = useSetRecoilState(paginationCursorState);
+  const setHasNextPage = useSetRecoilState(paginationHasNextPageState);
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     setText((event.target as HTMLInputElement).value);
   };
@@ -30,13 +36,15 @@ const SearchBox = () => {
         });
 
         setEntries(data.entries);
+        setCursor(data.metadata.cursor);
+        setHasNextPage(data.metadata.hasNextPage);
       } catch (e) {
         throw e;
       }
     };
 
     asyncLoadEntries();
-  }, [searchText, setEntries]);
+  }, [searchText, setCursor, setEntries, setHasNextPage]);
 
   return (
     <form className="w-[560px] relative" onSubmit={onSubmit}>

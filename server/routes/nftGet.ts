@@ -70,6 +70,7 @@ export default async (
       entries: data.tokens.nodes.map((node: Node) => node.token),
       metadata: {
         cursor: data.tokens.pageInfo.endCursor,
+        hasNextPage: data.tokens.pageInfo.hasNextPage,
         limit: data.tokens.pageInfo.limit,
       },
     });

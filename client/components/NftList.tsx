@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { nftSearchResultSelector } from "../selectors/nft";
 import NftItem, { NftItemProps } from "./NftItem";
+import LoadMore from "./LoadMore";
 
 const NftList = () => {
   const entries = useRecoilValue(nftSearchResultSelector);
@@ -15,6 +16,7 @@ const NftList = () => {
           </li>
         ))}
       </ul>
+      <LoadMore />
     </div>
   );
 };
