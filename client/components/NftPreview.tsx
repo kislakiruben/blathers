@@ -9,6 +9,7 @@ export type NftPreviewProps = {
       preview?: string;
     };
     mimeType?: string;
+    url?: string;
   };
   metadata: {
     image?: string;
@@ -18,7 +19,7 @@ export type NftPreviewProps = {
 };
 
 const NftPreview = ({ image, metadata }: NftPreviewProps) => {
-  const mimeType = image.mimeType || metadata.mimeType;
+  const mimeType = image?.mimeType || metadata?.mimeType;
 
   if (mimeType) {
     if (mimeType.startsWith("image/")) {
@@ -26,7 +27,8 @@ const NftPreview = ({ image, metadata }: NftPreviewProps) => {
 
       return <NftPreviewImage src={src} />;
     } else if (mimeType.startsWith("video/")) {
-      const src = metadata?.image || image?.mediaEncoding.preview || "";
+      const src =
+        metadata?.image || image?.mediaEncoding.preview || image.url || "";
 
       return <NftPreviewVideo mimeType={mimeType} src={src} />;
     }
