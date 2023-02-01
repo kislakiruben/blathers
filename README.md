@@ -40,7 +40,7 @@ Start the web app:
 npm start
 ```
 
-This will build the React app and then start a NodeJS server on `localhost:5001` with the following endpoints:
+This will build the React app and then start a NodeJS server on [`localhost:5001`](http://localhost:5001) with the following endpoints:
 
 - `/` - main page where the React app is loaded and rendered
 - `/api/nft` - an API endpoint used to call Zora; it accepts the following params:
