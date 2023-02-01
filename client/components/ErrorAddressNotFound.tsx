@@ -1,6 +1,7 @@
 import { useSetRecoilState } from "recoil";
 
 import { searchTextState } from "../atoms/ui";
+import { PLACEHOLDER_ADDRESSES } from "../constants";
 
 const ErrorAddressNotFound = () => {
   const setSearchText = useSetRecoilState(searchTextState);
@@ -22,46 +23,18 @@ const ErrorAddressNotFound = () => {
           Check out these owners in the mean time:
         </p>
         <ul className="text-slate-400/80 leading-7 text-sm">
-          <li>
-            <button
-              className="text-pink-500 hover:underline"
-              onClick={onClick}
-              type="button"
-              value="0xe468ce99444174bd3bbbed09209577d25d1ad673"
-            >
-              0xe468ce99444174bd3bbbed09209577d25d1ad673
-            </button>
-          </li>
-          <li>
-            <button
-              className="text-pink-500 hover:underline"
-              onClick={onClick}
-              type="button"
-              value="0xce1c7037b8737b911704d6c21c01675f6c047f1a"
-            >
-              0xce1c7037b8737b911704d6c21c01675f6c047f1a
-            </button>
-          </li>
-          <li>
-            <button
-              className="text-pink-500 hover:underline"
-              onClick={onClick}
-              type="button"
-              value="ix-shells.eth"
-            >
-              ix-shells.eth
-            </button>
-          </li>
-          <li>
-            <button
-              className="text-pink-500 hover:underline"
-              onClick={onClick}
-              type="button"
-              value="jacbo.eth"
-            >
-              jacbo.eth
-            </button>
-          </li>
+          {PLACEHOLDER_ADDRESSES.map((address) => (
+            <li key={address}>
+              <button
+                className="text-pink-500 hover:underline"
+                onClick={onClick}
+                type="button"
+                value={address}
+              >
+                {address}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

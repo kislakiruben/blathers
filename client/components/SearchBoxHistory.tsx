@@ -1,6 +1,7 @@
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 
 import { searchTextState, searchHistoryState } from "../atoms/ui";
+import { PLACEHOLDER_ADDRESSES } from "../constants";
 
 type SearchBoxHistoryProps = {
   hideHistory: Function;
@@ -60,46 +61,18 @@ const SearchBoxHistory = ({ hideHistory }: SearchBoxHistoryProps) => {
             </p>
           </div>
           <ul className="text-slate-400/80 text-sm border-t border-slate-400/20">
-            <li className="w-full">
-              <button
-                className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left"
-                onClick={onClickEntry}
-                type="button"
-                value="0xe468ce99444174bd3bbbed09209577d25d1ad673"
-              >
-                0xe468ce99444174bd3bbbed09209577d25d1ad673
-              </button>
-            </li>
-            <li className="w-full">
-              <button
-                className="text-pink-500 hover:bg-slate-500/10 py-2 px-4 w-full text-left"
-                onClick={onClickEntry}
-                type="button"
-                value="0xce1c7037b8737b911704d6c21c01675f6c047f1a"
-              >
-                0xce1c7037b8737b911704d6c21c01675f6c047f1a
-              </button>
-            </li>
-            <li className="w-full">
-              <button
-                className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left"
-                onClick={onClickEntry}
-                type="button"
-                value="ix-shells.eth"
-              >
-                ix-shells.eth
-              </button>
-            </li>
-            <li className="w-full">
-              <button
-                className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left rounded-b-lg"
-                onClick={onClickEntry}
-                type="button"
-                value="jacbo.eth"
-              >
-                jacbo.eth
-              </button>
-            </li>
+            {PLACEHOLDER_ADDRESSES.map((address) => (
+              <li className="w-full" key={address}>
+                <button
+                  className="text-pink-500 hover:bg-slate-400/10 py-2 px-4 w-full text-left"
+                  onClick={onClickEntry}
+                  type="button"
+                  value={address}
+                >
+                  {address}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       )}
