@@ -39,6 +39,19 @@ export default async (
           token {
             tokenId
             name
+            content {
+              url
+              mimeType
+              size
+              mediaEncoding {
+                ... on ImageEncodingTypes {
+                  poster
+                }
+                ... on VideoEncodingTypes {
+                  preview
+                }
+              }
+            }
             description
             metadata
             image {
