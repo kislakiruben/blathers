@@ -1,4 +1,5 @@
 import Express from "express";
+import get from "lodash/get";
 import { request, gql } from "graphql-request";
 import has from "lodash/has";
 
@@ -89,11 +90,13 @@ export default async (
       },
     });
   } catch (error: any) {
-    const addressNotFoundError = error?.response.errors.some((err: any) => {
-      return err.message.includes(
-        "Address must be a valid address or ENS domain"
-      );
-    });
+    const addressNotFoundError = get(error, "response.errors", []).some(
+      (err: any) => {
+        return err.message.includes(
+          "Address must be a valid address or ENS domain"
+        );
+      }
+    );
 
     if (addressNotFoundError) {
       res.sendStatus(404);
